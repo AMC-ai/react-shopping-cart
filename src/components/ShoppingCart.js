@@ -5,7 +5,7 @@ import Item from './ShoppingCartItem';
 //step 5ish
 import CartContext from '../contexts/CartContext';
 
-const ShoppingCart = props => {
+const ShoppingCart = () => {
 	const cart = useContext(CartContext);
 
 	const getCartTotal = () => {
