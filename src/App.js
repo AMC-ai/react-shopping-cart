@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 import data from './data';
-import { ProductContext } from '../src/contexts/ProductContext';
+
 // Components
 import Navigation from './components/Navigation';
 import Products from './components/Products';
 import ShoppingCart from './components/ShoppingCart';
+//step 4
+import { ProductContext } from '../src/contexts/ProductContext';
+//step 5
+import { CartContext } from '../src/contexts/CartContext';
 
 function App() {
 	//notice there are two states (products availabe and cart for keepin track of shopper items)
@@ -20,13 +24,13 @@ function App() {
 	//notice 3 components used 
 	return (
 		<ProductContext.Provider value={{ products, addItem }}>
+			<CartContext.Provider value={cart}>
+				<div className="App">
+					<Navigation cart={cart} />
 
-			<div className="App">
-				<Navigation cart={cart} />
-
-				{/* Routes */}
-				<Route exact path="/" component={Products} />
-				{/* <Route
+					{/* Routes */}
+					<Route exact path="/" component={Products} />
+					{/* <Route
 						exact
 						path="/"
 						render={() => (
@@ -37,12 +41,12 @@ function App() {
 						)}
 					/> */}
 
-				<Route
-					path="/cart"
-					render={() => <ShoppingCart cart={cart} />}
-				/>
-			</div>
-
+					<Route
+						path="/cart"
+						render={() => <ShoppingCart cart={cart} />}
+					/>
+				</div>
+			</CartContext.Provider>
 		</ProductContext.Provider>
 	);
 }
